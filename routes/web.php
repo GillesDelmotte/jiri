@@ -36,3 +36,5 @@ Route::resource('score', 'ScoreController')->middleware('auth');
 Route::resource('admin', 'AdminController')->middleware('auth');
 
 Route::resource('impression', 'ImpressionController')->middleware('auth');
+
+Route::get('/token/{token}', 'TokenController@verifyToken');

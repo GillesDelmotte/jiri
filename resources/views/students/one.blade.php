@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container">
-        <a href="/jiri/1" class="btn-dark btn">revenir en arrière</a>
+        <a href="/jiri/{{session('jiri_id')}}" class="btn-dark btn">revenir en arrière</a>
         <br>
         <br>
         <h1>{{$student->name}}</h1>
@@ -56,7 +56,7 @@
                 <form action="/impression" method="post">
                     @csrf
                     <div>
-                        <input type="hidden" value="1" name="jiri_id">
+                        <input type="hidden" value="{{session('jiri_id')}}" name="jiri_id">
                         <input type="hidden" value="{{$student->id}}" name="student_id">
                         <input type="hidden" value="{{auth()->id()}}" name="user_id">
                         <label for="impression_score">note&nbsp;:</label>

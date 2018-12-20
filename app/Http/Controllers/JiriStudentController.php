@@ -11,7 +11,7 @@ class JiriStudentController extends Controller
 {
     public function show(Student $student)
     {
-        $impression = Impression::where([['jiri_id', 1], ['student_id', $student->id], ['user_id', auth()->id()]])->get();
+        $impression = Impression::where([['jiri_id', session('jiri_id')], ['student_id', $student->id], ['user_id', auth()->id()]])->get();
         $student = $student->load('implementationsForCurrentJiriWithProjectsAndScore');
         return view('students.one', ['student' => $student, 'impression' => $impression]);
     }
