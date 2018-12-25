@@ -3,6 +3,9 @@
 namespace jiri\Console\Commands;
 
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Mail;
+use jiri\Jiri;
+use jiri\Mail\JiriEnded;
 
 class JiriStop extends Command
 {
@@ -11,7 +14,7 @@ class JiriStop extends Command
      *
      * @var string
      */
-    protected $signature = 'jiri:stop';
+    protected $signature = 'jiri:stop {jiri}';
 
     /**
      * The console command description.
@@ -19,6 +22,7 @@ class JiriStop extends Command
      * @var string
      */
     protected $description = 'stop the jiri';
+    protected $jiri;
 
     /**
      * Create a new command instance.
@@ -37,6 +41,24 @@ class JiriStop extends Command
      */
     public function handle()
     {
-        //
+        $jiri_id = $this->argument('jiri');
+        $this->jiri = Jiri::findOrFail($jiri_id)->load('judges');
+        $this->destroyToken();
+        $this->sendEmail();
+
+    }
+
+    private function destroyToken()
+    {
+        foreach($this->jiri->judges as $judge){
+            $judge->token = NULL;
+            $judge->save();
+        }
+    }
+
+    private function sendEmail(){
+        foreach($this->jiri->judges as $judge){
+            Mail::to($judge->email)->send(new JiriEnded($judge, $this->jiri));
+        }
     }
 }
