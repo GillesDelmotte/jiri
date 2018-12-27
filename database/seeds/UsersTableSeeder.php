@@ -14,13 +14,15 @@ class UsersTableSeeder extends Seeder
         \jiri\User::create([
             'name' => 'Gilles Delmotte',
             'email' => 'gilles.delmotte@outlook.be',
-            'password' => Hash::make('azerty')
+            'password' => Hash::make('azerty'),
+            'api_token' => str_random(60)
         ]);
 
         \jiri\User::create([
             'name' => 'Charlotte Toussaint',
             'email' => 'charlotte.toussaint@outlook.be',
-            'password' => Hash::make('azerty')
+            'password' => Hash::make('azerty'),
+            'api_token' => str_random(60)
         ]);
     }
 }
