@@ -1,14 +1,14 @@
 <template>
-    <div>
-        <navigation></navigation>
+    <section class="container">
+        <h1>Creation d'un nouveau jury</h1>
         <br>
         <router-view></router-view>
-    </div>
+    </section>
 </template>
 
 <script>
     export default {
-        name: "jiriAdmin"
+        name: "CreateJiri"
     }
 </script>
 

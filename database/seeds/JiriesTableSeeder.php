@@ -13,19 +13,23 @@ class JiriesTableSeeder extends Seeder
     {
         \jiri\Jiri::create([
             'name' => 'jury janvier 2019',
-            'user_id' => '1'
+            'user_id' => '1',
+            'scheduled_on' => '2019-04-22 08:20:00'
         ])
         ;\jiri\Jiri::create([
             'name' => 'jury janvier 2019',
-            'user_id' => '2'
+            'user_id' => '2',
+            'scheduled_on' => '2019-04-22 08:20:00'
         ]);
         \jiri\Jiri::create([
             'name' => 'jury juin 2019',
-            'user_id' => '1'
+            'user_id' => '1',
+            'scheduled_on' => '2019-04-22 08:20:00'
         ]);
         \jiri\Jiri::create([
             'name' => 'jury juin 2019',
-            'user_id' => '2'
+            'user_id' => '2',
+            'scheduled_on' => '2019-04-22 08:20:00'
         ]);
     }
 }

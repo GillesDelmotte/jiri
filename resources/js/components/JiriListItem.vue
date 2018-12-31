@@ -5,6 +5,7 @@
        </h2>
         <hr>
         <div v-if="jiri.is_active">
+
             <button class="btn btn-danger">Mettre fin a ce jury</button>
             <button class="btn btn-light">Accéder au dashboard</button>
         </div>

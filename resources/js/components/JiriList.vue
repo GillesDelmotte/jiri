@@ -20,9 +20,9 @@
 
 <script>
     import {mapState} from 'vuex';
-    import JiriListItem from "./jiriListItem";
+    import JiriListItem from "./JiriListItem";
     export default {
-        name: "jiriList",
+        name: "JiriList",
         components: {JiriListItem},
         data(){
             return {

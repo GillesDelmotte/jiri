@@ -2,6 +2,7 @@
 
 namespace jiri\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
 use jiri\Jiri;
 use Illuminate\Http\Request;
 
@@ -35,7 +36,11 @@ class JiriController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $name = $request['name'];
+        $date = $request['date'];
+        $time = $request['time'];
+        $scheduled_on = $date . ' ' . $time;
+        Jiri::create(['name' => $name, 'user_id' => auth()->id(),'scheduled_on' => $scheduled_on]);
     }
 
     /**

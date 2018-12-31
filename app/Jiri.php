@@ -9,6 +9,8 @@ class Jiri extends Model
 {
     protected $table = 'jiries';
 
+    protected $fillable = ['name', 'user_id', 'scheduled_on'];
+
     public function judges()
     {
         return $this->morphedByMany(User::class, 'person');

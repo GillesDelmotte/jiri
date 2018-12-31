@@ -23,9 +23,12 @@ import router from './router.js'
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key)))
 
-Vue.component('jiri-admin', require('./components/jiriAdmin.vue'));
-Vue.component('jiri-List', require('./components/jiriList.vue'));
-Vue.component('test', require('./components/test.vue'));
+Vue.component('jiri-admin', require('./components/JiriAdmin.vue'));
+Vue.component('jiri-List', require('./components/JiriList.vue'));
+Vue.component('navigation', require('./components/Navigation.vue'));
+Vue.component('create-jiri', require('./components/create/CreateJiri.vue'));
+Vue.component('dashboard', require('./components/Dashboard.vue'));
+Vue.component('basic-infos', require('./components/create/BasicInfos.vue'));
 Vue.component('example-component', require('./components/ExampleComponent.vue'));
 
 /**
