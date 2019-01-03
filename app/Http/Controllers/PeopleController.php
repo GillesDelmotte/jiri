@@ -2,8 +2,12 @@
 
 namespace jiri\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use jiri\Jiri;
 use jiri\People;
 use Illuminate\Http\Request;
+use jiri\User;
 
 class PeopleController extends Controller
 {
@@ -35,8 +39,34 @@ class PeopleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if($request['type'] === 'judge'){
+            $jiri = Jiri::where('user_id', Auth::user()->getAuthIdentifier())->orderBy('created_at','desc')->first();
+            foreach($request['allJudges'] as $judge) {
+                $user = User::where('email', $judge['email'])->first();
+                People::create([
+                    'jiri_id' => $jiri->id,
+                    'person_id' => $user->id,
+                    'person_type' => 'jiri\User'
+                ]);
+            }
+        }
+
+
     }
+
+    protected function storeUser(Request $request)
+    {
+        foreach($request['allJudges'] as $judge){
+            User::create([
+                'name' => $judge['name'],
+                'email' => $judge['email'],
+                'password' => Hash::make('azerty'),
+                'api_token' => str_random(60)
+            ]);
+        }
+    }
+
+
 
     /**
      * Display the specified resource.

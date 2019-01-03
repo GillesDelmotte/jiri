@@ -2,6 +2,7 @@
 
 namespace jiri\Http\Controllers\Auth;
 
+use Illuminate\Http\Request;
 use jiri\User;
 use jiri\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
@@ -67,6 +68,8 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'api_token' => str_random(60)
         ]);
     }
+
 }

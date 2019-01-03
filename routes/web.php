@@ -21,6 +21,9 @@ Route::get('/admin', function () {
 
 Auth::routes();
 
+Route::post('/addJudges', 'PeopleController@storeUser')->middleware('auth');
+Route::post('/addPeople', 'PeopleController@storePeople')->middleware('auth');
+
 Route::get('/authenticated-user', 'AuthenticatedUserController@fetch');
 
 Route::get('/home', 'HomeController@index')->name('home');
@@ -34,6 +37,8 @@ Route::get('/student/{student}/project/{project}', 'ProjectController@show')->mi
 Route::resource('jiri', 'JiriController')->middleware('auth');
 
 Route::resource('score', 'ScoreController')->middleware('auth');
+
+Route::resource('people', 'PeopleController')->middleware('auth');
 
 Route::resource('impression', 'ImpressionController')->middleware('auth');
 

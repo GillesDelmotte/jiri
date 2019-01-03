@@ -11,6 +11,8 @@
         </div>
         <div v-else>
             <button class="btn btn-primary">Démarrer ce jury</button>
+            <button class="btn btn-secondary">Modifier ce jury</button>
+            <button class="btn btn-danger">supprimer ce jury</button>
         </div>
     </div>
 </template>

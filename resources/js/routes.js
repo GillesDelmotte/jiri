@@ -3,6 +3,7 @@ import CreateJiri from './components/create/CreateJiri';
 import Dashboard from './components/Dashboard';
 import BasicInfos from './components/create/BasicInfos';
 import AddJudges from "./components/create/AddJudges";
+import AddStudents from "./components/create/AddStudents";
 
 
 export default [
@@ -17,7 +18,7 @@ export default [
         component: CreateJiri,
         children: [
             {
-                path: '',
+                path: '/createJiri',
                 name:'basicInfos',
                 component: BasicInfos
 
@@ -26,9 +27,15 @@ export default [
                 path:'/addJudges',
                 name: 'addJudges',
                 component: AddJudges
+            },
+            {
+                path:'/addStudents',
+                name: 'addStudents',
+                component: AddStudents
             }
         ]
-    },{
+    },
+    {
         path: '/dashboard',
         name:'Dashboard',
         component: Dashboard

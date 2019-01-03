@@ -5,7 +5,9 @@ Vue.use(Vuex);
 
 const state = {
     currentUser: null,
-    userJiries: null
+    userJiries: null,
+    allUsers: null,
+    activeJiri : null,
 };
 const getters = {};
 const mutations = {
@@ -14,6 +16,12 @@ const mutations = {
     },
     setUserJiries(state, jiries){
         state.userJiries = jiries
+    },
+    setAllUsers(state, users){
+        state.allUsers = users
+    },
+    setActiveJiri(state, jiri){
+        state.activeJiri = jiri
     }
 };
 const actions = {
@@ -35,6 +43,26 @@ const actions = {
                     })
                     .catch(error => console.error(error))
             })
+    },
+    setAllUsers({commit, state}){
+        return new Promise((resolve, reject) => {
+            window.axios.get('/api/user?api_token=' + state.currentUser.api_token)
+                .then(response => {
+                    commit('setAllUsers', response.data);
+                    resolve();
+                })
+                .catch(error => console.error(error))
+        })
+    },
+    setActiveJiri({commit, state}){
+        return new Promise((resolve, reject) => {
+            window.axios.get('/api/dashboard?api_token=' + state.currentUser.api_token)
+                .then(response => {
+                    commit('setActiveJiri', response.data)
+                    resolve();
+                })
+                .catch(error =>console.error(error))
+        })
     }
 };
 

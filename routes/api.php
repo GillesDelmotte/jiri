@@ -19,3 +19,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::middleware('auth:api')->resource('jiri', 'Api\AdminJiriController');
 
+Route::middleware('auth:api')->resource('user', 'Api\AdminUserController');

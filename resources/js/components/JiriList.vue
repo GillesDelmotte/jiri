@@ -9,9 +9,6 @@
             <div v-else>
                 il semblerai que tu n'as pas encore créé de jury
             </div>
-            <div>
-
-            </div>
         </div>
         <div v-else>
             plz wait...

@@ -21,7 +21,7 @@
 </template>
 
 <script>
-    import router from '../../router'
+    import router from '../../router';
     export default {
         name: "BasicInfos",
         data(){
@@ -35,7 +35,6 @@
             sendData(){
                 window.axios.post('/jiri', {name: this.name, date: this.date, time: this.time})
                     .then(function (response) {
-                        console.log(response)
                         router.push({name: 'addJudges'});
                     })
                     .catch(function (error) {
