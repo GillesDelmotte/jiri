@@ -52,12 +52,12 @@
                                 <div class="input-group-text">
                                     <input type="checkbox"
                                            aria-label="Checkbox for following text input"
-                                           :id="student.id + '$' + project.name">
+                                           :id="student.id + '$' + project.name"
+                                           @change="addProjectToStudent({student: student.id, project: project.name, key:student.id + '$' + project.name})">
                                 </div>
                             </div>
                             <label :for="student.id + '$' + project.name"
-                                   class="form-control"
-                                   @click="addProjectToStudent({student: student.id, project: project.name, key:student.id + '$' + project.name})">
+                                   class="form-control">
                                 {{project.name}}
                             </label>
                         </div>
