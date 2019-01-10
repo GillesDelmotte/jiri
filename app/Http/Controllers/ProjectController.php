@@ -37,7 +37,12 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        foreach($request['allProjects'] as $project){
+            Project::create([
+                'name' => $project['name'],
+                'description' => $project['description']
+            ]);
+        }
     }
 
     /**

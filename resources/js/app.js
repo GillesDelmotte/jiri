@@ -28,6 +28,7 @@ Vue.component('jiri-List', require('./components/JiriList.vue'));
 Vue.component('navigation', require('./components/Navigation.vue'));
 Vue.component('add-judges', require('./components/create/AddJudges.vue'));
 Vue.component('add-students', require('./components/create/AddStudents.vue'));
+Vue.component('add-projects', require('./components/create/AddProjects.vue'));
 Vue.component('create-jiri', require('./components/create/CreateJiri.vue'));
 Vue.component('dashboard', require('./components/Dashboard.vue'));
 Vue.component('basic-infos', require('./components/create/BasicInfos.vue'));

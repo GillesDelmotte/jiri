@@ -4,6 +4,9 @@ namespace jiri\Http\Controllers;
 
 use jiri\Implement;
 use Illuminate\Http\Request;
+use jiri\Impression;
+use jiri\Jiri;
+use jiri\Project;
 
 class ImplementController extends Controller
 {
@@ -35,7 +38,15 @@ class ImplementController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $jiri = Jiri::where('user_id', auth()->id())->orderBy('created_at', 'desc')->first();
+        foreach ($request['implementations'] as $implementation){
+            $project = Project::where('name', $implementation['project'])->first();
+            Implement::create([
+               'student_id' => $implementation['student'],
+               'project_id' => $project->id,
+               'jiri_id' => $jiri->id
+            ]);
+        }
     }
 
     /**

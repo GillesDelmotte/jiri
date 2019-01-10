@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Hash;
 use jiri\Jiri;
 use jiri\People;
 use Illuminate\Http\Request;
+use jiri\Student;
 use jiri\User;
 
 class PeopleController extends Controller
@@ -39,9 +40,9 @@ class PeopleController extends Controller
      */
     public function store(Request $request)
     {
-        if($request['type'] === 'judge'){
-            $jiri = Jiri::where('user_id', Auth::user()->getAuthIdentifier())->orderBy('created_at','desc')->first();
-            foreach($request['allJudges'] as $judge) {
+        $jiri = Jiri::where('user_id', Auth::user()->getAuthIdentifier())->orderBy('created_at','desc')->first();
+
+        foreach($request['allJudges'] as $judge) {
                 $user = User::where('email', $judge['email'])->first();
                 People::create([
                     'jiri_id' => $jiri->id,
@@ -49,9 +50,20 @@ class PeopleController extends Controller
                     'person_type' => 'jiri\User'
                 ]);
             }
+    }
+
+    protected function storePeopleStudents(Request $request){
+
+        $jiri = Jiri::where('user_id', Auth::user()->getAuthIdentifier())->orderBy('created_at','desc')->first();
+
+        foreach($request['allStudents'] as $student){
+            $toto = Student::where('email', $student['email'])->first();
+            People::create([
+                'jiri_id' => $jiri->id,
+                'person_id' => $toto->id,
+                'person_type' => 'jiri\Student'
+            ]);
         }
-
-
     }
 
     protected function storeUser(Request $request)
@@ -62,6 +74,16 @@ class PeopleController extends Controller
                 'email' => $judge['email'],
                 'password' => Hash::make('azerty'),
                 'api_token' => str_random(60)
+            ]);
+        }
+    }
+
+    protected function storeStudent(Request $request)
+    {
+        foreach($request['allStudents'] as $student){
+            Student::create([
+                'name' => $student['name'],
+                'email' => $student['email'],
             ]);
         }
     }

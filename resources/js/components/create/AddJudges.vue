@@ -15,8 +15,8 @@
                            class="form-control test">
                     <ul class="list-group">
                         <li v-for="judge in searchJudges" :judge="judge" :key="judge.id" class="list-group-item list-group-item-action" @click="choice(judge)">
-                            {{judge.name}}
-                        </li>
+                        {{judge.name}}
+                    </li>
                     </ul>
                     <hr>
                     <label for="judgeEmail" class="">Email&nbsp;:</label>
@@ -30,10 +30,9 @@
                 <br>
                 <button class="btn btn-primary" @click="addJudge">ajouter à la liste</button>
                 <br>
-                <br>
                 <hr>
                 <div>
-                    <h5>Liste des jurés ajouté</h5>
+                    <h5>Liste des jurés ajoutés</h5>
                     <ul>
                         <li v-for="(judge, index) in allJudges">
                             {{judge.name}} || {{judge.email}} || <button class="btn btn-danger" @click="deleteJudge(index)">supprimer</button>
@@ -81,8 +80,6 @@
                 this.addToDb.push(judge);
                 this.currentJudge = '';
                 this.currentEmail = '';
-
-
             },
             deleteJudge(index){
                 this.allJudges.splice(index, 1);
@@ -90,7 +87,6 @@
             sendData(){
                 window.axios.post('/addJudges', {allJudges: this.addToDb, type: 'judge'})
                     .then(response => {
-                        console.log(response)
                         this.createPeople()
                     })
                     .catch(function (error) {

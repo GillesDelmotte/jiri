@@ -20,3 +20,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::middleware('auth:api')->resource('jiri', 'Api\AdminJiriController');
 
 Route::middleware('auth:api')->resource('user', 'Api\AdminUserController');
+
+Route::middleware('auth:api')->resource('student', 'Api\AdminStudentController');
+
+Route::middleware('auth:api')->resource('project', 'Api\AdminProjectController');
+
+Route::middleware('auth:api')->resource('studentsForProjects', 'Api\AdminStudentForProjectController');

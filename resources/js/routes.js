@@ -4,6 +4,7 @@ import Dashboard from './components/Dashboard';
 import BasicInfos from './components/create/BasicInfos';
 import AddJudges from "./components/create/AddJudges";
 import AddStudents from "./components/create/AddStudents";
+import AddProjects from "./components/create/AddProjects";
 
 
 export default [
@@ -32,6 +33,11 @@ export default [
                 path:'/addStudents',
                 name: 'addStudents',
                 component: AddStudents
+            },
+            {
+                path:'/addProjects',
+                name:'addProjects',
+                component: AddProjects
             }
         ]
     },

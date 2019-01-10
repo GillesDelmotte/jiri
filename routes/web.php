@@ -22,7 +22,14 @@ Route::get('/admin', function () {
 Auth::routes();
 
 Route::post('/addJudges', 'PeopleController@storeUser')->middleware('auth');
-Route::post('/addPeople', 'PeopleController@storePeople')->middleware('auth');
+
+Route::post('/addStudents', 'PeopleController@storeStudent')->middleware('auth');
+
+Route::post('/addPeopleStudents', 'PeopleController@storePeopleStudents')->middleware('auth');
+
+Route::post('/addProject', 'ProjectController@store')->middleware('auth');
+
+Route::post('/createImplementation', 'ImplementController@store')->middleware('auth');
 
 Route::get('/authenticated-user', 'AuthenticatedUserController@fetch');
 
