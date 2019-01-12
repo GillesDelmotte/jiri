@@ -9,7 +9,7 @@
                      active-class="active"
                      class="nav-link"
                      exact
-        >Creer un jury</router-link>
+        >Créer un jury</router-link>
         <router-link :to="{name:'Dashboard'}"
                      active-class="active"
                      class="nav-link"

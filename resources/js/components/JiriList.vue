@@ -1,6 +1,6 @@
 <template>
         <div v-if="componentReady" class="container">
-            <h1>voici tous tes jurys</h1>
+            <h1 class="hidden">voici tes jurys planifié pour les prochaines semaines</h1>
             <div v-if="userJiries.length">
                 <div class="list-group">
                     <jiri-list-item v-for="jiri in userJiries" :jiri="jiri" :key="jiri.id"></jiri-list-item>
@@ -44,5 +44,7 @@
 </script>
 
 <style scoped>
-
+    .hidden{
+        font-size: 0;
+    }
 </style>

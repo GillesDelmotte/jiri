@@ -43,6 +43,12 @@ Route::get('/student/{student}/project/{project}', 'ProjectController@show')->mi
 
 Route::resource('jiri', 'JiriController')->middleware('auth');
 
+Route::post('/deleteJury', 'JiriController@destroy')->middleware('auth');
+
+Route::post('/startJiri', 'JiriController@startJiri')->middleware('auth');
+
+Route::post('/stopJiri', 'JiriController@stopJiri')->middleware('auth');
+
 Route::resource('score', 'ScoreController')->middleware('auth');
 
 Route::resource('people', 'PeopleController')->middleware('auth');

@@ -3,8 +3,13 @@
 namespace jiri\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+use jiri\Implement;
 use jiri\Jiri;
 use Illuminate\Http\Request;
+use jiri\Mail\JiriEnded;
+use jiri\Mail\JiriStarted;
+use jiri\People;
 
 class JiriController extends Controller
 {
@@ -84,8 +89,58 @@ class JiriController extends Controller
      * @param  \jiri\Jiri  $jiries
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Jiri $jiri)
+    public function destroy(Jiri $jiri, Request $request)
     {
-        //
+        $id = $request['id'];
+
+        /*
+         * delete jury
+         */
+        $jiri = Jiri::where('id', $id)->first();
+        $jiri->delete();
+
+        /*
+         * delete people
+         */
+        $people = People::where('jiri_id', $id)->get();
+        foreach ($people as $person){
+            $person->delete();
+        }
+
+        /*
+         * delete implementations
+         */
+        $implementations = Implement::where('jiri_id', $id)->get();
+        foreach ($implementations as $implementation){
+            $implementation->delete();
+        }
+
+    }
+
+    public function startJiri(Request $request){
+        $id = $request['id'];
+        $jiri = Jiri::findOrFail($id)->load('judges');
+        $jiri->is_active = true;
+        $jiri->save();
+
+        foreach ($jiri->judges as $judge){
+            $judge->token = time() . '$' . $judge->id . '$' . $jiri->id;
+            $judge->save();
+            Mail::to($judge->email)->send(new JiriStarted($judge, $jiri));
+        }
+
+    }
+
+    public function stopJiri(Request $request){
+        $id = $request['id'];
+        $jiri = Jiri::findOrFail($id)->load('judges');
+        $jiri->is_active = false;
+        $jiri->save();
+
+        foreach($jiri->judges as $judge){
+            $judge->token = '';
+            $judge->save();
+            Mail::to($judge->email)->send(new JiriEnded($judge, $jiri));
+        }
     }
 }

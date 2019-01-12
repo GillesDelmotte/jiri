@@ -10,7 +10,6 @@ const state = {
     allStud: null,
     allProjects: null,
     allStudentsForProjects: null,
-    activeJiri: null,
 };
 
 const getters = {};
@@ -33,9 +32,6 @@ const mutations = {
     },
     setAllStudentsForProjects(state, students) {
         state.allStudentsForProjects = students
-    },
-    setActiveJiri(state, jiri) {
-        state.activeJiri = jiri
     }
 };
 
@@ -94,16 +90,6 @@ const actions = {
             window.axios.get('/api/studentsForProjects?api_token=' + state.currentUser.api_token)
                 .then(response => {
                     commit('setAllStudentsForProjects', response.data);
-                    resolve();
-                })
-                .catch(error => console.error(error))
-        })
-    },
-    setActiveJiri({commit, state}) {
-        return new Promise((resolve, reject) => {
-            window.axios.get('/api/dashboard?api_token=' + state.currentUser.api_token)
-                .then(response => {
-                    commit('setActiveJiri', response.data)
                     resolve();
                 })
                 .catch(error => console.error(error))
