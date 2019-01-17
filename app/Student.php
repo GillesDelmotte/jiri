@@ -31,6 +31,13 @@ class Student extends Model
             ->where('jiri_id', session('jiri_id'));
     }
 
+    public function implementationsForCurrentJiriWithProjectsAndScores(){
+        return $this->hasMany(Implement::class)
+            ->with(['project', 'scores'])
+            ->where('jiri_id', session('jiri_id'));
+    }
+
+
     public function impressions(){
         return $this->hasMany(Impression::class);
     }

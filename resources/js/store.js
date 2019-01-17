@@ -10,6 +10,9 @@ const state = {
     allStud: null,
     allProjects: null,
     allStudentsForProjects: null,
+    dashboard: null,
+    dashboardUser: null,
+    currentJiri: null
 };
 
 const getters = {};
@@ -32,6 +35,15 @@ const mutations = {
     },
     setAllStudentsForProjects(state, students) {
         state.allStudentsForProjects = students
+    },
+    setDashboard(state, data){
+        state.dashboard = data
+    },
+    setDashboardUser(state, data){
+        state.dashboardUser = data
+    },
+    setCurrentJiri(state, data){
+        state.currentJiri = data
     }
 };
 
@@ -90,6 +102,36 @@ const actions = {
             window.axios.get('/api/studentsForProjects?api_token=' + state.currentUser.api_token)
                 .then(response => {
                     commit('setAllStudentsForProjects', response.data);
+                    resolve();
+                })
+                .catch(error => console.error(error))
+        })
+    },
+    setDashboard({commit, state}){
+        return new Promise((resolve, reject) => {
+            window.axios.get('/dashboard')
+                .then(response => {
+                    commit('setDashboard', response.data);
+                    resolve();
+                })
+                .catch(error => console.error(error))
+        })
+    },
+    setUserForCurrentJiri({commit, state}){
+        return new Promise((resolve, reject) => {
+            window.axios.get('/dashboardUser')
+                .then(response => {
+                    commit('setDashboardUser', response.data)
+                    resolve();
+                })
+                .catch(error => console.error(error))
+        })
+    },
+    setCurrentJiri({commit, state}){
+        return new Promise((resolve, reject) => {
+            window.axios.get('/dashboardJiri')
+                .then(response => {
+                    commit('setCurrentJiri', response.data)
                     resolve();
                 })
                 .catch(error => console.error(error))

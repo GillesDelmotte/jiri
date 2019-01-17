@@ -26,3 +26,5 @@ Route::middleware('auth:api')->resource('student', 'Api\AdminStudentController')
 Route::middleware('auth:api')->resource('project', 'Api\AdminProjectController');
 
 Route::middleware('auth:api')->resource('studentsForProjects', 'Api\AdminStudentForProjectController');
+
+Route::middleware('auth:api')->resource('dashboard', 'Api\AdminDashboardController');

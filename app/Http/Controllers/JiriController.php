@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use jiri\Mail\JiriEnded;
 use jiri\Mail\JiriStarted;
 use jiri\People;
+use jiri\Student;
 
 class JiriController extends Controller
 {
@@ -128,7 +129,7 @@ class JiriController extends Controller
             $judge->save();
             Mail::to($judge->email)->send(new JiriStarted($judge, $jiri));
         }
-
+        $request->session()->put('jiri_id', $id);
     }
 
     public function stopJiri(Request $request){
@@ -142,5 +143,7 @@ class JiriController extends Controller
             $judge->save();
             Mail::to($judge->email)->send(new JiriEnded($judge, $jiri));
         }
+
+        $request->session()->forget('jiri_id');
     }
 }

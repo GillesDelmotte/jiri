@@ -43,7 +43,17 @@ class ScoreController extends Controller
         $validatedData = $request->all();
         Score::create($validatedData);
         $implementation = Implement::find($request->get('implement_id'));
+        $scores = Score::where('implement_id', $request['implement_id'])->get();
+        $result = null;
+        $divisor = null;
+        foreach ($scores as $score){
+            $result += $score->score;
+            $divisor++;
+        }
+        $implementation->result = $result/$divisor;
+        $implementation->save();
         $student = $implementation->student;
+
         return \Redirect::action('JiriStudentController@show', $student->id);
     }
 
@@ -87,6 +97,17 @@ class ScoreController extends Controller
     {
         $score->update($request->all());
         $implementation = Implement::find($score->implement_id);
+
+        $scores = Score::where('implement_id', $score->implement_id)->get();
+        $result = null;
+        $divisor = null;
+        foreach ($scores as $score){
+            $result += $score->score;
+            $divisor++;
+        }
+        $implementation->result = $result/$divisor;
+        $implementation->save();
+
         $student = $implementation->student;
         return \Redirect::action('JiriStudentController@show', $student->id);
     }

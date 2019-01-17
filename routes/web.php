@@ -21,6 +21,12 @@ Route::get('/admin', function () {
 
 Auth::routes();
 
+Route::get('/dashboard', 'dashboardController@index')->middleware('auth');
+
+Route::get('/dashboardUser', 'dashboardController@dashboardUser')->middleware('auth');
+
+Route::get('/dashboardJiri', 'dashboardController@dashboardJiri')->middleware('auth');
+
 Route::post('/addJudges', 'PeopleController@storeUser')->middleware('auth');
 
 Route::post('/addStudents', 'PeopleController@storeStudent')->middleware('auth');
