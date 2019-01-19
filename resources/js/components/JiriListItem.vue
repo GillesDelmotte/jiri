@@ -13,7 +13,7 @@
         </div>
         <div v-else>
             <button class="btn btn-primary" @click="startJiri(jiri.id)">Démarrer ce jury</button>
-            <button class="btn btn-secondary">Modifier ce jury</button>
+            <button class="btn btn-secondary" @click="modifyJiri(jiri.id)">Modifier ce jury</button>
             <button class="btn btn-danger" @click="deleteJury(jiri.id)">supprimer ce jury</button>
         </div>
     </div>
@@ -40,6 +40,9 @@
             }
         },
         methods:{
+            modifyJiri(id){
+                router.push({path: `modify/${id}`});
+            },
             deleteJury(id){
                 window.axios.post('/deleteJury', {id: id})
                     .then(response => {

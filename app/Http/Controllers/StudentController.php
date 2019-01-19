@@ -2,6 +2,7 @@
 
 namespace jiri\Http\Controllers;
 
+use jiri\People;
 use jiri\Student;
 use Illuminate\Http\Request;
 
@@ -81,5 +82,20 @@ class StudentController extends Controller
     public function destroy(Student $student)
     {
         //
+    }
+
+    public function modifyStudents(Request $request)
+    {
+        $people = People::where('jiri_id', $request['id'])->where('person_type', 'Jiri\Student')->get();
+
+        $students=[];
+
+        foreach($people as $person){
+            $student = Student::where('id', $person->person_id)->first();
+            $students[] = $student;
+        }
+
+
+        return $students;
     }
 }

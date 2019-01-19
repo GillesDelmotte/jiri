@@ -134,4 +134,18 @@ class PeopleController extends Controller
     {
         //
     }
+
+    public function modifyJudges(Request $request)
+    {
+        $people = People::where('jiri_id', $request['id'])->where('person_type', 'Jiri\User')->get();
+
+        $judges = [];
+
+        foreach ($people as $person){
+            $judge = User::where('id', $person->person_id)->first();
+            $judges[] = $judge;
+        }
+
+        return $judges;
+    }
 }

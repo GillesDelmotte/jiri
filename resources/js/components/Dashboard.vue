@@ -3,6 +3,7 @@
         wait plz
     </div>
     <div v-else>
+        {{test}}
         <h1 style="text-align: center">
             {{currentJiri.name}}
         </h1>
@@ -31,7 +32,7 @@
                                 </p>
                                 <div v-for="score in implementation.scores" >
                                     <hr>
-                                    <h4>
+                                    <h4 class="circle">
                                         {{getUser(score.user_id)}}
                                     </h4>
                                     <p>
@@ -60,14 +61,15 @@
             }
         },
         computed:{
-            ...mapState(['dashboard', 'dashboardUser', 'currentJiri'])
+            ...mapState(['dashboard', 'dashboardUser', 'currentJiri', 'test'])
         },
         methods:{
             getUser(id){
                 const user = this.dashboardUser.find( element => {
                     return element.id === id
                 })
-                return user.name
+                const words = user.name.split(' ')
+                return words[0].charAt(0) + words[1].charAt(0)
             }
         },
         mounted: function () {
@@ -86,5 +88,13 @@
 </script>
 
 <style scoped>
-
+    .circle{
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background-color: lightgrey;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 </style>

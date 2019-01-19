@@ -92,4 +92,18 @@ class ProjectController extends Controller
     {
         //
     }
+
+    public function modifyProjects(Request $request)
+    {
+        $implementations = Implement::where('jiri_id', $request['id'])->distinct()->get(['project_id']);
+
+        $projects = [];
+
+        foreach ($implementations as $implementation){
+            $project = Project::where('id', $implementation->project_id)->first();
+            $projects[] = $project;
+        }
+
+        return $projects;
+    }
 }

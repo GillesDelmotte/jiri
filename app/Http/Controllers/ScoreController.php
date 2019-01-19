@@ -3,6 +3,7 @@
 namespace jiri\Http\Controllers;
 
 use Illuminate\Support\Facades\Redirect;
+use jiri\Events\ScoreCreated;
 use jiri\Http\Requests\StoreScore;
 use jiri\Implement;
 use jiri\Project;
@@ -41,7 +42,9 @@ class ScoreController extends Controller
     public function store(StoreScore $request)
     {
         $validatedData = $request->all();
-        Score::create($validatedData);
+        $score = Score::create($validatedData);
+
+
         $implementation = Implement::find($request->get('implement_id'));
         $scores = Score::where('implement_id', $request['implement_id'])->get();
         $result = null;
@@ -50,9 +53,12 @@ class ScoreController extends Controller
             $result += $score->score;
             $divisor++;
         }
+
         $implementation->result = $result/$divisor;
         $implementation->save();
         $student = $implementation->student;
+
+        broadcast(new ScoreCreated($score));
 
         return \Redirect::action('JiriStudentController@show', $student->id);
     }

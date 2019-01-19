@@ -5,6 +5,7 @@ import BasicInfos from './components/create/BasicInfos';
 import AddJudges from "./components/create/AddJudges";
 import AddStudents from "./components/create/AddStudents";
 import AddProjects from "./components/create/AddProjects";
+import ModifyJiri from "./components/ModifyJiri";
 
 
 export default [
@@ -40,6 +41,11 @@ export default [
                 component: AddProjects
             }
         ]
+    },
+    {
+      path: '/modify/:id',
+      name:'modifyJiri',
+      component:ModifyJiri
     },
     {
         path: '/dashboard',

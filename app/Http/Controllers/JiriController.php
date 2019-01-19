@@ -118,7 +118,8 @@ class JiriController extends Controller
 
     }
 
-    public function startJiri(Request $request){
+    public function startJiri(Request $request)
+    {
         $id = $request['id'];
         $jiri = Jiri::findOrFail($id)->load('judges');
         $jiri->is_active = true;
@@ -132,7 +133,8 @@ class JiriController extends Controller
         $request->session()->put('jiri_id', $id);
     }
 
-    public function stopJiri(Request $request){
+    public function stopJiri(Request $request)
+    {
         $id = $request['id'];
         $jiri = Jiri::findOrFail($id)->load('judges');
         $jiri->is_active = false;
@@ -146,4 +148,12 @@ class JiriController extends Controller
 
         $request->session()->forget('jiri_id');
     }
+
+    public function modifyJiri(Request $request)
+    {
+        $jiri = Jiri::where('id', $request['id'])->first();
+
+        return $jiri;
+    }
+
 }

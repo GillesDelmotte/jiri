@@ -23,6 +23,14 @@ Auth::routes();
 
 Route::get('/dashboard', 'dashboardController@index')->middleware('auth');
 
+Route::post('/setModifyJiri', 'jiriController@modifyJiri')->middleware('auth');
+
+Route::post('/setModifyJudges', 'PeopleController@modifyJudges')->middleware('auth');
+
+Route::post('/setModifyStudents', 'StudentController@modifyStudents')->middleware('auth');
+
+Route::post('/setModifyProjects', 'ProjectController@modifyProjects')->middleware('auth');
+
 Route::get('/dashboardUser', 'dashboardController@dashboardUser')->middleware('auth');
 
 Route::get('/dashboardJiri', 'dashboardController@dashboardJiri')->middleware('auth');

@@ -171,7 +171,7 @@ return [
          */
         jiri\Providers\AppServiceProvider::class,
         jiri\Providers\AuthServiceProvider::class,
-        // jiri\Providers\BroadcastServiceProvider::class,
+        jiri\Providers\BroadcastServiceProvider::class,
         jiri\Providers\EventServiceProvider::class,
         jiri\Providers\RouteServiceProvider::class,
 

@@ -12,7 +12,12 @@ const state = {
     allStudentsForProjects: null,
     dashboard: null,
     dashboardUser: null,
-    currentJiri: null
+    currentJiri: null,
+    modifyJiri: null,
+    modifyJudges: null,
+    modifyStudents: null,
+    modifyProjects: null,
+    test: []
 };
 
 const getters = {};
@@ -44,6 +49,18 @@ const mutations = {
     },
     setCurrentJiri(state, data){
         state.currentJiri = data
+    },
+    setModifyJiri(state, data){
+        state.modifyJiri = data
+    },
+    setModifyJudges(state, data){
+        state.modifyJudges = data
+    },
+    setModifyStudents(state, data){
+        state.modifyStudents = data
+    },
+    setModifyProjects(state, data){
+        state.modifyProjects = data
     }
 };
 
@@ -115,6 +132,11 @@ const actions = {
                     resolve();
                 })
                 .catch(error => console.error(error))
+
+            Echo.join('adminScore')
+                .listen('.score.created', e => {
+                    this.state.test.push(e.message)
+                })
         })
     },
     setUserForCurrentJiri({commit, state}){
@@ -133,6 +155,46 @@ const actions = {
                 .then(response => {
                     commit('setCurrentJiri', response.data)
                     resolve();
+                })
+                .catch(error => console.error(error))
+        })
+    },
+    setModifyJiri({commit, state}, data){
+        return new Promise((resolve, reject) => {
+            window.axios.post('/setModifyJiri', {id: data})
+                .then(response => {
+                    commit('setModifyJiri', response.data)
+                    resolve();
+                })
+                .catch(error => console.error(error))
+        })
+    },
+    setModifyJudges({commit, state}, data){
+        return new Promise((resolve, reject) => {
+            window.axios.post('/setModifyJudges', {id: data})
+                .then(response =>{
+                    commit('setModifyJudges', response.data);
+                    resolve();
+                })
+                .catch(error => console.error(error))
+        })
+    },
+    setModifyStudents({commit, state}, data){
+        return new Promise((resolve, reject) =>{
+            window.axios.post('/setModifyStudents', {id: data})
+                .then(response =>{
+                    commit('setModifyStudents', response.data);
+                    resolve();
+                })
+                .catch(error => console.error(error))
+        })
+    },
+    setModifyProjects({commit, state}, data){
+        return new Promise((resolve, reject) =>{
+            window.axios.post('setModifyProjects', {id: data})
+                .then(response => {
+                    commit('setModifyProjects', response.data)
+                    resolve()
                 })
                 .catch(error => console.error(error))
         })
