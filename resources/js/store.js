@@ -133,10 +133,14 @@ const actions = {
                 })
                 .catch(error => console.error(error))
 
-            Echo.join('adminScore')
-                .listen('.score.created', e => {
-                    this.state.test.push(e.message)
+            Echo.channel('adminScore')
+                .listen('.score.created', (e) => {
+                    this.state.test.push(e)
+                    console.log({e})
                 })
+
+
+
         })
     },
     setUserForCurrentJiri({commit, state}){

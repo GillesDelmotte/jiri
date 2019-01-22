@@ -57,8 +57,8 @@ class ScoreController extends Controller
         $implementation->result = $result/$divisor;
         $implementation->save();
         $student = $implementation->student;
-
         broadcast(new ScoreCreated($score));
+
 
         return \Redirect::action('JiriStudentController@show', $student->id);
     }

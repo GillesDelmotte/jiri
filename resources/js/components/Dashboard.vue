@@ -10,8 +10,8 @@
         <br>
         <div>
             <div>
-                <div v-for="student in dashboard" class="list-group-item mb-3">
-                    <div class="d-flex justify-content-between flex-wrap align-content-start">
+                <div v-for="student in dashboard" class="card mb-3">
+                    <div class="d-flex justify-content-between flex-wrap align-content-start card-header">
                         <h3>
                             {{student.name}}
                         </h3>
@@ -19,8 +19,7 @@
                             Moyenne de l'étudiant&nbsp;:{{student.implementations_for_current_jiri_with_projects_and_scores[0].result}}
                         </p>
                     </div>
-                    <hr>
-                    <div class="d-flex flex-wrap">
+                    <div class="d-flex flex-wrap card-body">
                         <div v-for="implementation in student.implementations_for_current_jiri_with_projects_and_scores"
                              class="card p-2 flex-fill">
                             <div class="card-body">

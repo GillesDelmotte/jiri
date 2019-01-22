@@ -9,7 +9,7 @@
         <hr>
         <div v-if="jiri.is_active">
             <button class="btn btn-danger" @click="stopJiri(jiri.id)">Mettre fin a ce jury</button>
-            <button class="btn btn-light">Accéder au dashboard</button>
+            <!--<button class="btn btn-light">Accéder au dashboard</button>-->
         </div>
         <div v-else>
             <button class="btn btn-primary" @click="startJiri(jiri.id)">Démarrer ce jury</button>

@@ -79,9 +79,18 @@ class JiriController extends Controller
      * @param  \jiri\Jiri  $jiries
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Jiri $jiri)
+    public function update(Request $request)
     {
-        //
+        $jiri = Jiri::where('id', $request['id'])->first();
+        $jiri->name = $request['jiriName'];
+        if($request['jiriDate'] === null){
+            $pieces = explode(" ", $jiri->scheduled_on);
+            $jiri->scheduled_on = $pieces[0] . " " . $request['jiriTime'];
+        }else{
+            $jiri->scheduled_on = $request['jiriDate'] . " " . $request['jiriTime'];
+        }
+
+        $jiri->save();
     }
 
     /**

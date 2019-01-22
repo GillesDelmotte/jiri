@@ -25,6 +25,16 @@ Route::get('/dashboard', 'dashboardController@index')->middleware('auth');
 
 Route::post('/setModifyJiri', 'jiriController@modifyJiri')->middleware('auth');
 
+Route::post('/modifyJiriBasicInfos', 'jiriController@update')->middleware('auth');
+
+Route::post('/modifyImplementations', 'ImplementCOntroller@modifyImplementations')->middleware('auth');
+
+Route::post('/addJudgesAndStudents', 'PeopleController@addJudgesAndStudents')->middleware('auth');
+
+Route::post('/deletePeopleForJiri', 'PeopleController@deletePeopleForJiri')->middleware('auth');
+
+Route::post('/addPeopleToDb', 'PeopleController@addPeopleToDb')->middleware('auth');
+
 Route::post('/setModifyJudges', 'PeopleController@modifyJudges')->middleware('auth');
 
 Route::post('/setModifyStudents', 'StudentController@modifyStudents')->middleware('auth');

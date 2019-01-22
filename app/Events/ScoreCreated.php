@@ -34,11 +34,16 @@ class ScoreCreated implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new PrivateChannel('adminScore');
+        return new Channel('adminScore');
     }
 
     public function broadcastAs()
     {
         return 'score.created';
+    }
+
+    public function broadcastWith()
+    {
+        return ['scoreResult' => $this->score];
     }
 }

@@ -148,4 +148,68 @@ class PeopleController extends Controller
 
         return $judges;
     }
+
+    public function addJudgesAndStudents(Request $request)
+    {
+        foreach($request['newStudents'] as $student){
+            Student::create([
+                'name' => $student['name'],
+                'email' => $student['email'],
+            ]);
+        }
+
+        foreach($request['newJudges'] as $judge){
+           User::create([
+                'name' => $judge['name'],
+                'email' => $judge['email'],
+                'password' => Hash::make('azerty'),
+                'api_token' => str_random(60)
+            ]);
+        }
+    }
+
+
+
+    public function deletePeopleForJiri(Request $request)
+    {
+        foreach ($request['judges'] as $judge){
+            $user = People::where('jiri_id', $request['id'])->where('person_type', 'Jiri\User')->where('person_id', $judge['id'])->first();
+            if($user !== null){
+                $user->delete();
+            }
+        }
+
+        foreach ($request['students'] as $student){
+            $stud = People::where('jiri_id', $request['id'])->where('person_type', 'Jiri\Student')->where('person_id', $student['id'])->first();
+            if($stud !== null){
+                $stud->delete();
+            }
+        }
+    }
+
+    public function addPeopleToDb(Request $request)
+    {
+        $people = People::where('jiri_id', $request['id'])->get();
+        foreach($people as $person){
+            $person->delete();
+        }
+
+        foreach($request['students'] as $student){
+            $stud = Student::where('email', $student['email'])->first();
+            People::create([
+               'jiri_id' => $request['id'],
+               'person_id' => $stud['id'],
+               'person_type' => 'Jiri\Student'
+            ]);
+        }
+
+        foreach($request['judges'] as $judge){
+            $user = User::where('email', $judge['email'])->first();
+            People::create([
+               'jiri_id' => $request['id'],
+               'person_id' => $user['id'],
+               'person_type' => 'Jiri\User'
+            ]);
+        }
+    }
 }
